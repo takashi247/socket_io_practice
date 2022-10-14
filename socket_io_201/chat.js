@@ -11,7 +11,13 @@ io.on("connection", (socket) => {
   socket.on("messageToServer", (dataFromClient) => {
     console.log(dataFromClient);
   });
-  socket.on("newMessageToServer", (msg) => {
-    io.emit("messageToClients", { text: msg.text });
-  });
+  socket.join("level1");
+  socket
+    .to("level1")
+    .emit("joined", `${socket.id} says I have joined the level 1 room!`);
+});
+
+io.of("/admin").on("connection", (socket) => {
+  console.log("Someone connected to the admin namespace!");
+  io.of("/admin").emit("welcome", "Welcome to the admin channel!");
 });
