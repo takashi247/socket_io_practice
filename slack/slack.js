@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 const socketio = require("socket.io");
-const { update } = require("tar");
-const Namespace = require("./classes/Namespace");
 let namespaces = require("./data/namespaces");
 
 app.use(express.static(__dirname + "/public"));
